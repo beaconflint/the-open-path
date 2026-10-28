@@ -106,6 +106,16 @@ orderForm.addEventListener('submit', event => {
       showNotice('Could not confirm submission', 'We could not confirm whether your request was saved. Do not submit again yet. Contact us so we can check your order. No payment was started.');
     }
   }, 20000);
+  // Apps Script's sandbox can prevent postMessage from reaching this page.
+  // A completed iframe navigation is used as the checkout handoff instead.
+  // This does NOT prove payment or even a successful order response.
+  const onLoad = () => {
+    if (!pending) return;
+    frame.removeEventListener('load', onLoad);
+    resetButton();
+    window.location.assign(HELCIM_CHECKOUT);
+  };
+  frame.addEventListener('load', onLoad);
   postForm.submit();
   postForm.remove();
 });
