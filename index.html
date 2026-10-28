@@ -36,7 +36,7 @@
 <dialog aria-labelledby="notice-title" class="modal" id="notice"><h2 id="notice-title">Website Preview</h2><p id="notice-body"></p><button id="close-notice" type="button">Close</button></dialog>
 <script>
 'use strict';
-const ORDER_https://script.google.com/macros/s/AKfycby4IcK1heF-tgRgJYMCX7zolPFMds2zpfRWUYbBVShCguXdU48PA_2606YLlQ-FLOuU/exec = 'https://script.google.com/macros/s/AKfycby4IcK1heF-tgRgJYMCX7zolPFMds2zpfRWUYbBVShCguXdU48PA_2606YLlQ-FLOuU/exec';
+const ORDER_ENDPOINT = 'https://script.google.com/macros/s/AKfycby4IcK1heF-tgRgJYMCX7zolPFMds2zpfRWUYbBVShCguXdU48PA_2606YLlQ-FLOuU/exec';
 const HELCIM_CHECKOUT = 'https://larchin.myhelcim.com/hosted/?token=345af2116eb455cccac185&itemSKU1=CEREMONY-001&itemDescription1=Personalized+Symbolic+Ceremony&itemQuantity1=1&itemPrice1=29.99&amountHash=a3d5f6510e8f99715faa83f4534261aa00ae5e18a916916a043e4b8fe2e303f4&itemPriceHash1=a3d5f6510e8f99715faa83f4534261aa00ae5e18a916916a043e4b8fe2e303f4';
 const notice = document.getElementById('notice');
 function showNotice(title, body) {
@@ -82,7 +82,7 @@ orderForm.addEventListener('submit', event => {
   fields.set('request_token', requestToken);
   const postForm = document.createElement('form');
   postForm.method = 'POST';
-  postForm.action = ORDER_https://script.google.com/macros/s/AKfycby4IcK1heF-tgRgJYMCX7zolPFMds2zpfRWUYbBVShCguXdU48PA_2606YLlQ-FLOuU/exec;
+  postForm.action = ORDER_ENDPOINT;
   postForm.target = frame.name;
   postForm.style.display = 'none';
   for (const [name, value] of fields) {
