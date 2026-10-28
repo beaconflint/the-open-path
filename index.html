@@ -62,8 +62,12 @@ function resetButton() {
   payButton.textContent = '♧  Proceed to Secure Payment';
 }
 window.addEventListener('message', event => {
-  if (!pending || event.source !== frame.contentWindow) return;
-  if (!/^https:\/\/(script\.google\.com|script\.googleusercontent\.com|[a-z0-9-]+\.googleusercontent\.com)$/.test(event.origin)) return;
+  if (!pending) return;
+  // Apps Script HTML responses can run in a nested, sandboxed iframe.
+  // Their message source may not be frame.contentWindow and origin may be "null".
+  // Authenticate the reply using the unpredictable per-submission request token below.
+  if (event.origin !== 'null' &&
+      !/^https:\/\/(script\.google\.com|script\.googleusercontent\.com|[a-z0-9-]+\.googleusercontent\.com)$/.test(event.origin)) return;
   const data = event.data;
   if (!data || data.kind !== 'OPENPATH_ORDER_RESULT' || data.requestToken !== requestToken) return;
   resetButton();
